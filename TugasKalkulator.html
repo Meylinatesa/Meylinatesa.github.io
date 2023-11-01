@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana dengan Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <h4>Kalkulator Sederhana</h4>
+        <input type="number" v-model="angkaPertama" placeholder="Angka pertama">
+        <input type="number" v-model="angkaKedua" placeholder="Angka kedua">
+        <select v-on:change="hitung" v-model="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <button @click="hitung">Hitung</button>
+        <p>Hasil: {{ hasil }}</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+        el: '#app',
+        data: {
+            angkaPertama: 0,
+            angkaKedua: 0,
+            operator: '+',
+            hasil: 0
+        },
+        methods: {
+            hitung: function () {
+                const angka1 = parseFloat(this.angkaPertama);
+                const angka2 = parseFloat(this.angkaKedua);
+
+                if (this.operator === '+') {
+                    this.hasil = angka1 + angka2;
+                } else if (this.operator === '-') {
+                    this.hasil = angka1 - angka2;
+                } else if (this.operator === '*') {
+                    this.hasil = angka1 * angka2;
+                } else if (this.operator === '/') {
+                    if (this.angkaKedua !== 0) {
+                        this.hasil = angka1 / angka2;
+                    } else {
+                        this.hasil = "Tidak dapat dibagi oleh nol";
+                    }
+                }   
+            }
+        }
+	    });
+	</script>
+</body>
+</html>
+
+
